@@ -1,4 +1,4 @@
-import os, argparse
+import os, argparse, re
 from dotenv import load_dotenv
 from transformers import AutoTokenizer, BitsAndBytesConfig, Gemma3ForCausalLM
 import torch
@@ -57,4 +57,14 @@ with torch.inference_mode():
 
 outputs = tokenizer.batch_decode(outputs)
 
-print(outputs)
+# Добавляем парсинг ответа модели
+def extract_between_tokens(text):
+    # Using regular expression to find all occurrences between the tokens
+    pattern = r'<start_of_turn>(.*?)<end_of_turn>'
+    matches = re.findall(pattern, text, re.DOTALL)
+    return matches
+
+extracted_data = extract_between_tokens(outputs)
+
+for i, data in enumerate(extracted_data, 1):
+    print(f"Extracted {i}: {data.strip()}")
