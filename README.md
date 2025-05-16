@@ -1,3 +1,11 @@
+# Example usage
+
+```bash
+python3 bot.py --prompt "Помоги мне придумать задание на развитие навыков написания киносценариев"
+```
+
+![Иллюстрация работы системы](https://github.com/user-attachments/assets/cc48badc-4142-471c-a29f-d3c423100045)
+
 # TODO
 
 Retrieval-Augmented Generation
